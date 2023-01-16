@@ -1,4 +1,7 @@
 # Authentication App with Nextjs
+
+~~~great example of real life authentication in the applications like facebook and google 
+
 ## Getting Started
 
 First, run the development server:
