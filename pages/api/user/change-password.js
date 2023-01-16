@@ -42,13 +42,19 @@ export default async function handler(req, res) {
 
     const hashedPassword = await hashPassword(newPassword);
 
-    const result = await usersCollection.updateOne(
-        { email: userEmail },
-        { $set: { password: hashedPassword } }
+    try {
+        const result = await usersCollection.updateOne(
+            { email: userEmail },
+            { $set: { password: hashedPassword } }
 
-    );
+        );
+        res.status(200).json({ message: 'Password Updated!' });
+    } catch (error) {
+        client.close();
+        res.status(500).json({ message: error.message || 'something went wrong' });
+        return;
+    }
     client.close();
-    req.status(200).json({ message: 'Password Updated!' })
 
 
 }
